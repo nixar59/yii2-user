@@ -17,6 +17,6 @@ class SignupAction extends Action
             $this->controller->redirect($this->redirectUrl);
         }
 
-        $this->controller->render($this->view);
+        $this->controller->render($this->view, compact('model'));
     }
 }
