@@ -22,7 +22,7 @@ abstract class Action extends \yii\base\Action
         }
 
         if (!isset($this->view)) {
-            $this->view = '$this->controller->viewPath' . $this->id . '.php';
+            $this->view = $this->controller->viewPath . $this->id . '.php';
         }
 
         if (!isset($this->redirectUrl)) {
