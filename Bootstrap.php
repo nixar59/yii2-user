@@ -5,9 +5,9 @@ namespace nixar59\user;
 
 
 use nixar59\user\modules\web\Module;
+use Yii;
 use yii\base\Application;
 use yii\base\BootstrapInterface;
-use yii\web\YiiAsset;
 
 class Bootstrap implements BootstrapInterface
 {
@@ -18,6 +18,6 @@ class Bootstrap implements BootstrapInterface
      */
     public function bootstrap($app)
     {
-        \Yii::$app->setModule('user', Module::class);
+        Yii::$app->setModule('user', new Module('user'));
     }
 }
