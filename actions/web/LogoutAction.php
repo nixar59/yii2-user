@@ -30,6 +30,6 @@ class LogoutAction extends Action
     public function run()
     {
         Yii::$app->user->logout();
-        $this->controller->redirect($this->redirectUrl);
+        return $this->controller->redirect($this->redirectUrl);
     }
 }

@@ -18,6 +18,6 @@ class LoginAction extends Action
             $this->controller->goBack();
         }
 
-        $this->controller->render($this->view);
+        return $this->controller->render($this->view);
     }
 }
