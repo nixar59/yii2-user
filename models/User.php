@@ -20,17 +20,12 @@ use yii\web\IdentityInterface;
  * @property string $email_confirm_code
  * @property boolean $email_confirmed
  * @property string $password
+ * @property string $auth_key
+ * @property string $access_token
+ *
  */
 class User extends ActiveRecord implements IdentityInterface
 {
-
-    public function beforeSave($insert)
-    {
-        if ($this->isNewRecord) {
-            $this->password = Yii::$app->security->generatePasswordHash($this->password);
-        }
-        return parent::beforeSave($insert);
-    }
 
     /**
      * Finds an identity by the given ID.
@@ -55,7 +50,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        return null;
+        return static::findOne(['access_token' => $token]);
     }
 
     /**
@@ -87,7 +82,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getAuthKey()
     {
-        return Yii::$app->security->generatePasswordHash($this->id . $this->login . $this->password . date('F  Y'));
+        return $this->auth_key;
     }
 
     /**
@@ -101,7 +96,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function validateAuthKey($authKey)
     {
-        return Yii::$app->security->validatePassword($authKey, $this->getAuthKey());
+        return $authKey == $this->auth_key;
     }
 
     public function validatePassword($password)
@@ -112,5 +107,10 @@ class User extends ActiveRecord implements IdentityInterface
     public static function findByLogin($login)
     {
         return static::find()->where(['email' => $login])->orWhere(['phone' => $login])->one();
+    }
+
+    public function setPassword($password)
+    {
+        $this->password = Yii::$app->security->generatePasswordHash($password);
     }
 }

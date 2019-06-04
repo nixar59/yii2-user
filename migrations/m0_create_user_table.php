@@ -15,8 +15,14 @@ class m0_create_user_table extends Migration
         $this->createTable('{{%user}}', [
             'id' => $this->primaryKey(),
             'phone' => $this->string(),
+            'phone_confirm_code' => $this->string(),
+            'phone_confirmed' => $this->boolean(),
             'email' => $this->string(),
+            'email_confirm_code' => $this->string(),
+            'email_confirmed' => $this->boolean(),
             'password' => $this->string(),
+            'auth_key' => $this->string(),
+            'access_token' => $this->string(),
         ]);
     }
 
