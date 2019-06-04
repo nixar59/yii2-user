@@ -15,18 +15,18 @@ use yii\web\Controller;
 
 class AuthController extends Controller
 {
+    public $viewPath = '@userWebModule/views/';
+
     public function actions()
     {
         return [
             'signup' => [
                 'class' => SignupAction::class,
                 'modelClass' => SignupForm::class,
-                'view' => '@userWebModule/views/signup.php',
             ],
             'login' => [
                 'class' => LoginAction::class,
                 'modelClass' => LoginForm::class,
-                'view' => '@userWebModule/views/login.php',
             ],
             'logout' => [
                 'class' => LogoutAction::class,
